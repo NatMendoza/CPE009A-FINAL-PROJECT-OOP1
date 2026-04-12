@@ -1,0 +1,193 @@
+START PROGRAM
+
+INITIALIZE AuthSystem
+INITIALIZE Tracker
+
+SET current_user = NONE
+SET role = NONE
+
+LOOP forever
+
+    CLEAR screen
+    DISPLAY "MacroTracker" title
+
+    IF current_user is NONE THEN
+
+        DISPLAY menu:
+            1. Register User
+            2. Register Admin
+            3. Login
+            4. Exit
+
+        GET user choice
+
+        IF choice = Register User THEN
+            INPUT username
+            INPUT password
+
+            IF username not in database THEN
+                SAVE user with role = "user"
+                LOG "User registered"
+                DISPLAY success message
+            ELSE
+                DISPLAY error message
+            ENDIF
+
+            WAIT 1 second
+
+        ELSE IF choice = Register Admin THEN
+            INPUT secret_code
+
+            IF secret_code != "MacroTrackerAdmin" THEN
+                DISPLAY invalid code
+                WAIT
+            ELSE
+                INPUT username
+                INPUT password
+
+                GENERATE random admin_id (4–6 digits)
+
+                SAVE user with role = "admin" + admin_id
+                LOG "Admin registered"
+
+                DISPLAY "Your Admin ID is: XXXX (remember it)"
+            ENDIF
+
+            WAIT 2 seconds
+
+        ELSE IF choice = Login THEN
+            INPUT username
+            INPUT password
+
+            GET user from database
+
+            IF user NOT found THEN
+                DISPLAY error
+            ELSE IF password incorrect THEN
+                DISPLAY error
+            ELSE
+                IF role = admin THEN
+                    INPUT admin_id
+
+                    IF admin_id incorrect THEN
+                        DISPLAY error
+                        RETURN to menu
+                    ENDIF
+                ENDIF
+
+                SET current_user = username
+                SET role = user role
+                LOG "User logged in"
+                DISPLAY success
+            ENDIF
+
+            WAIT
+
+        ELSE IF choice = Exit THEN
+            DISPLAY goodbye
+            BREAK LOOP
+        ENDIF
+
+    ELSE  (USER IS LOGGED IN)
+
+        CLEAR screen
+        DISPLAY title
+
+        IF role = admin THEN
+
+            DISPLAY admin menu:
+                1. View Logs
+                2. View Food History
+                3. Delete User
+                4. Logout
+
+            GET choice
+
+            IF View Logs THEN
+                OPEN logs.txt
+                DISPLAY contents
+            ENDIF
+
+            IF View History THEN
+                DISPLAY all food records
+            ENDIF
+
+            IF Delete User THEN
+                INPUT username
+                ASK confirmation
+
+                IF yes THEN
+                    DELETE user from database
+                    LOG deletion
+                ENDIF
+            ENDIF
+
+            IF Logout THEN
+                SET current_user = NONE
+                SET role = NONE
+            ENDIF
+
+        ELSE (NORMAL USER)
+
+            DISPLAY user menu:
+                1. Add Food
+                2. View History
+                3. Delete Food Entry
+                4. Calculate Total
+                5. BMI Check
+                6. Delete Account
+                7. Logout
+
+            GET choice
+
+            IF Add Food THEN
+                INPUT food details
+                SCALE values
+                ADD to history
+                DISPLAY success
+            ENDIF
+
+            IF View History THEN
+                DISPLAY table of foods
+            ENDIF
+
+            IF Delete Food Entry THEN
+                DISPLAY list with index
+                INPUT selection
+                REMOVE selected item
+            ENDIF
+
+            IF Calculate Total THEN
+                SUM calories, sugar, fat
+                DISPLAY totals
+                DISPLAY health suggestions
+            ENDIF
+
+            IF BMI Check THEN
+                INPUT weight, height
+                COMPUTE BMI
+                DISPLAY BMI
+                DISPLAY advice
+            ENDIF
+
+            IF Delete Account THEN
+                ASK confirmation
+
+                IF yes THEN
+                    DELETE user from database
+                    LOG deletion
+                    SET current_user = NONE
+                ENDIF
+            ENDIF
+
+            IF Logout THEN
+                SET current_user = NONE
+            ENDIF
+
+        ENDIF
+
+    ENDIF
+
+END LOOP
+
+END PROGRAM
