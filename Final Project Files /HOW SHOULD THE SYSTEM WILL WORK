@@ -1,0 +1,12 @@
+1. System Starts
+1.1 Displays "MACROTRACKER" on a big font size.
+1.2 Initializes Food Tracking and Authentication System.
+1.3 Set current users and role to 0 or none.
+2. Clears terminal using OS Module
+3. Program Should Run in a continious loop until user choice is exit.
+3.1 If a wrong action/choice/input/invalid input was made loops to the main menu.
+4. Authentication 
+4.1 If no logged user, Show Menu Choices (Register User(5), Rgister Admin(6), Login(7), Exit)
+
+TO BE UPDATED
+
