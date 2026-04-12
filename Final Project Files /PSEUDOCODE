@@ -1,0 +1,204 @@
+START PROGRAM
+
+IMPORT SYSTEM MODULES:
+    os → screen clearing
+    time → delays + timestamps
+    json → database storage
+    random → admin ID generation
+    rich → UI styling
+    questionary → CLI menus
+    pyfiglet → title display
+    abc → abstraction (OOP)
+
+---------------------------------------
+INITIALIZE SYSTEM COMPONENTS
+---------------------------------------
+
+CREATE AuthSystem
+CREATE Tracker
+SET current_user = NONE
+SET role = NONE
+
+---------------------------------------
+MAIN LOOP
+---------------------------------------
+
+WHILE True:
+
+    CLEAR SCREEN
+    DISPLAY "MACROTRACKER TITLE"
+
+    -----------------------------------
+    IF USER NOT LOGGED IN
+    -----------------------------------
+
+        SHOW MENU:
+            1. Register User
+            2. Register Admin
+            3. Login
+            4. Exit
+
+        GET user choice
+
+        --------------------------------
+        REGISTER USER FLOW
+        --------------------------------
+        IF Register User:
+
+            INPUT username
+            INPUT password
+
+            CREATE User object  ← OOP (Inheritance + Polymorphism)
+
+            CALL get_role() → returns "user"
+
+            STORE in database (users.json)
+
+            WRITE log to logs.txt
+
+            WAIT 1 second
+
+        --------------------------------
+        REGISTER ADMIN FLOW
+        --------------------------------
+        IF Register Admin:
+
+            INPUT secret code
+
+            IF secret code != "MacroTrackerAdmin":
+                SHOW error
+                CONTINUE loop
+
+            INPUT username
+            INPUT password
+
+            CREATE Admin object  ← OOP
+
+            GENERATE random admin_id (1000–999999)
+
+            CALL get_role() → returns "admin"
+
+            STORE user + admin_id in database
+
+            DISPLAY admin_id to user (IMPORTANT)
+
+            WRITE log to logs.txt
+
+            WAIT 2 seconds
+
+        --------------------------------
+        LOGIN FLOW
+        --------------------------------
+        IF Login:
+
+            INPUT username
+            INPUT password
+
+            FETCH user from database
+
+            IF user not found OR password wrong:
+                SHOW error
+                CONTINUE
+
+            IF role == admin:
+                INPUT admin_id
+
+                IF admin_id mismatch:
+                    SHOW error
+                    CONTINUE
+
+            SET current_user = username
+            SET role = user role
+
+            WRITE login log
+
+            WAIT
+
+        --------------------------------
+        EXIT
+        --------------------------------
+        IF Exit:
+            TERMINATE program
+
+    -----------------------------------
+    ELSE (USER LOGGED IN)
+    -----------------------------------
+
+        CLEAR SCREEN
+        DISPLAY TITLE
+
+        --------------------------------
+        IF ROLE = ADMIN
+        --------------------------------
+
+            SHOW ADMIN MENU:
+                1. View Logs
+                2. View Food History
+                3. Delete User
+                4. Logout
+
+            GET choice
+
+            IF View Logs:
+                READ logs.txt
+                DISPLAY content
+
+            IF View History:
+                DISPLAY tracker history
+
+            IF Delete User:
+                INPUT username
+                CONFIRM
+                DELETE user from database
+                LOG action
+
+            IF Logout:
+                RESET current_user and role
+
+        --------------------------------
+        IF ROLE = USER
+        --------------------------------
+
+            SHOW USER MENU:
+                1. Add Food
+                2. View History
+                3. Delete Food Entry
+                4. Calculate Total
+                5. BMI Check
+                6. Delete Account
+                7. Logout
+
+            GET choice
+
+            IF Add Food:
+                INPUT food data
+                SCALE values (per 100g)
+                ADD to tracker list
+
+            IF View History:
+                DISPLAY food table
+
+            IF Delete Food:
+                SELECT item
+                REMOVE from list
+
+            IF Calculate Total:
+                SUM calories, sugar, fat
+                CALL HealthAdvisor.show()
+
+            IF BMI Check:
+                INPUT weight, height
+                COMPUTE BMI
+                DISPLAY result
+                CALL advice()
+
+            IF Delete Account:
+                CONFIRM
+                DELETE from database
+
+            IF Logout:
+                RESET session
+
+END LOOP
+
+END PROGRAM
