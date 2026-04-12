@@ -1,1 +1,80 @@
+MacroTracker: A Macronutrient Intake Tracker that Provides a Guideline Based on their Body Mass Index
+
+Deoferio, Jan Zachary M.I. 
+Mauro, Ryan Lewis M.I. 
+Mendoza, Nathaniel M.I. 
+Pilapil, Loreen Jae M.I
+Silao, Johrel Louie T.
+
+
+Technological Institute of the Philippines 
+Quezon City 
+April 2026
+
+
+Table of Contents 
+PROJECT TITLE.............................................................................................................................................1 Table of Contents.......................................................................................................................................... 2 PROBLEM AND ITS BACKGROUND............................................................................................................3 
+1.1 Introduction.......................................................................................................................................3 1.2 The Project........................................................................................................................................ 3 1.3 Objectives..........................................................................................................................................3 1.4 Flowchart of the System.................................................................................................................. 3 
+IMPLEMENTATION OF OOP..........................................................................................................................4 2.1 Object Oriented Programming Implementation............................................................................. 4 2.1.1 Encapsulation..........................................................................................................................4 2.1.2 Inheritance............................................................................................................................... 4 2.1.3 Abstraction.............................................................................................................................. 4 2.1.4 Polymorphism......................................................................................................................... 4 2.2 Python Elements (Python Modules, PIP)........................................................................................4 
+RESULTS AND DISCUSSION........................................................................................................................5 3.1 Output................................................................................................................................................ 5 3.2 Conclusion........................................................................................................................................ 5 REFERENCES................................................................................................................................................6 APPENDICES................................................................................................................................................. 7
+PROBLEM AND ITS BACKGROUND 
+
+
+
+1.1 Introduction 
+<General Problem> 
+	The difficulty of individuals maintaining their healthy food intake and monitoring their energy levels in the modern world.There is a specific requirement for energy intake that an individual’s body needs in order for it to function properly and to ensure their physiological growth and prevent any diseases that they may encounter. However, many people struggle to track their own macronutrients - carbohydrates, lipids, and proteins, which are essential for primary energy production and bodily functions.
+<Specific Problem> 
+	Manual tracking limitations are one of the problems that we researchers observed. With this, individuals lack the ability to record their meals and log their daily physical activities. Another limitation is that there is a need for personalized health journeys that calculate the person’s BMI (Body Mass Index) in order to provide a suggestion/s on what meals and physical activities that they should perform daily.
+
+<Introduce your Solution> 
+1.2 The Project 
+<Discuss how the project works THOROUGHLY> 
+1.3 Objectives 
+<General Objectives> 
+1. <Specific Objective 1> 
+2. <Specific Objective 2> 
+1.4 Flowchart of the System 
+<Flow Chart Subsection Introduction> 
+
+Figure 1: <flow chart name> 
+<Flow Chart Description> Example: Figure 1 illustrates…
+IMPLEMENTATION OF OOP 
+2.1 Object Oriented Programming Implementation 
+<Subsection introduction> 
+2.1.1 Encapsulation 
+2.1.2 Inheritance 
+2.1.3 Abstraction 
+2.1.4 Polymorphism 
+<Implementation of OOP (Encapsulation,Inheritance, Abstraction, Polymorphism> 
+Figure 3. <name of figure> 
+Code discussion 
+2.2 Python Elements (Python Modules, PIP) 
+<Consider having a table here>
+RESULTS AND DISCUSSION 
+3.1 Output 
+<Subsection introduction > 
+<Output + discussion of the Figure> 
+GUI or CLI 
+Figure 4. <name of figure> 
+3.2 Conclusion 
+<conclude results and discussions, add recommendations>
+
+REFERENCES 
+<APA Format Alphabetical Order>
+
+Dubey, Viksar, and Jérémie Lumbroso. “Analyzing the Effects of Caloric and Macronutrient Consumption on Productivity: A Quantified Self Approach to Assess Work Patterns and Habits.” Journal of Student Research, vol. 12, no. 4, 30 Nov. 2023, pdfs.semanticscholar.org/5737/a578ec0b3d790e525aa198d9a34c52e1a644.pdf, https://doi.org/10.47611/jsrhs.v12i4.5729. Accessed 21 Mar. 2025.
+
+Savarino, Giovanni, et al. “Macronutrient Balance and Micronutrient Amounts through Growth and Development.” Italian Journal of Pediatrics, vol. 47, no. 1, 8 May 2021, www.ncbi.nlm.nih.gov/pmc/articles/PMC8106138/.
+
+APPENDICES 
+Appendix A: Github Repo
+
+
+Appendix B: Youtube Link/Video Demo
+
+
+
+
+
 
