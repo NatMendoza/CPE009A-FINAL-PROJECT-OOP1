@@ -1,23 +1,66 @@
+import time
 from data.database import Database
+from authentication.user import User
+from authentication.admin import Admin
+from rich import print
 
 db = Database()
+SECRET_CODE = "MacroTrackerAdmin"
 
 class AuthSystem:
 
-    def register(self):
-        u = input("User: ")
-        p = input("Pass: ")
+    def log(self, message):
+        with open("logs.txt", "a") as f:
+            f.write(f"{time.ctime()} - {message}\n")
 
-        data = db.load()
-        data[u] = p
-        db.save(data)
+    def register_user(self):
+        username = input("Username: ")
+        password = input("Password: ")
+    
+        user = User(username, password)  # OBJECT
+
+        if db.create_user(username, password, user.get_role()):
+            print("[green]User registered![/green]")
+            self.log(f"User registered: {username}")
+        else:
+            print("[red]User already exists[/red]")
+
+        time.sleep(1)
+
+    def register_admin(self):
+        code = input("Enter Admin Secret Code: ")
+
+        if code != SECRET_CODE:
+            print("[red]Invalid admin code[/red]")
+            return
+
+        username = input("Admin Username: ")
+        password = input("Password: ")
+
+        admin = Admin(username, password)
+        admin_id = admin.get_admin_id()
+
+        if db.create_user(username, password, admin.get_role(), admin_id):
+            print(f"[green]Admin registered! Your ID: {admin_id}[/green]")
+            self.log(f"Admin registered: {username}")
+        else:
+            print("[red]Admin already exists[/red]")
 
     def login(self):
-        u = input("User: ")
-        p = input("Pass: ")
+        username = input("Username: ")
+        password = input("Password: ")
 
-        data = db.load()
+        user = db.get_user(username)
 
-        if u in data and data[u] == p:
-            print("Login success")
-            return True
+        if not user or user["password"] != password:
+            print("[red]Invalid credentials[/red]")
+            return None, None
+
+        if user["role"] == "admin":
+            admin_id = input("Enter Admin ID: ")
+            if str(user["admin_id"]) != admin_id:
+                print("[red]Invalid Admin ID[/red]")
+                return None, None
+
+        print("[green]Login successful![/green]")
+        return username, user["role"]
