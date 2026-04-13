@@ -24,7 +24,7 @@ def pause():
 def main():
     auth = AuthSystem()
     tracker = Tracker()
-
+ 
     current_user = None
     role = None
 
