@@ -1,16 +1,30 @@
 from rich import print
 
 class HealthAdvisor:
+
     @staticmethod
     def show(cal, sugar, fat):
         print("\n[bold yellow]Health Advice[/bold yellow]")
 
-        if cal > 4000:
-            print("[red]High calories[/red]")
-        if sugar > 50:
-            print("[red]Too much sugar[/red]")
-        if fat > 70:
-            print("[red]Too much fat[/red]")
+        if cal > 3000:
+            print("[red]Reduce calorie intake[/red]")
+        else:
+            print("[green]Calories are okay[/green]")
 
-        if cal <= 4000 and sugar <= 50 and fat <= 70:
-            print("[green]Balanced diet[/green]")
+        if sugar > 50:
+            print("[red]Cut down sugary foods[/red]")
+
+        if fat > 70:
+            print("[red]Lower fat consumption[/red]")
+
+    @staticmethod
+    def bmi_advice(bmi):
+        print("\n[bold yellow]BMI Advice[/bold yellow]")
+
+        if bmi < 18.5:
+            print("Eat more nutritious food")
+        elif bmi < 25:
+            print("Maintain your lifestyle")
+        else:
+            print("Exercise more and reduce calories")
+            
