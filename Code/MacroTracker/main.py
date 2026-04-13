@@ -1,5 +1,6 @@
 import os
 import time
+import random
 import questionary
 import pyfiglet
 from rich.console import Console
@@ -12,19 +13,25 @@ from models.macros import FoodItem
 
 console = Console()
 
+# ================= CLEAR SCREEN =================
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# ================= TITLE (CHANGING COLOR) =================
 def show_title():
-    console.print(pyfiglet.figlet_format("MacroTracker"), style="cyan")
+    colors = ["cyan", "green", "yellow", "magenta", "blue"]
+    color = random.choice(colors)
+    console.print(pyfiglet.figlet_format("MacroTracker"), style=color)
 
+# ================= PAUSE =================
 def pause():
     input("\nPress Enter to continue...")
 
+# ================= MAIN =================
 def main():
     auth = AuthSystem()
     tracker = Tracker()
- 
+
     current_user = None
     role = None
 
@@ -32,8 +39,9 @@ def main():
         clear()
         show_title()
 
-        # 🔐 NOT LOGGED IN MENU
+        # 🔐 NOT LOGGED IN
         if not current_user:
+
             choice = questionary.select(
                 "Select Option:",
                 choices=[
@@ -49,7 +57,7 @@ def main():
                 pause()
 
             elif choice == "Register Admin":
-                auth.register_admin()   # THIS SHOWS ADMIN ID AFTER
+                auth.register_admin()
                 pause()
 
             elif choice == "Login":
@@ -65,8 +73,9 @@ def main():
             clear()
             show_title()
 
-            # ADMIN MENU
+            # ================= ADMIN =================
             if role == "admin":
+
                 choice = questionary.select(
                     f"[ADMIN] {current_user}",
                     choices=[
@@ -78,8 +87,6 @@ def main():
                 ).ask()
 
                 if choice == "View Logs":
-                    clear()
-                    show_title()
                     try:
                         with open("logs.txt", "r") as f:
                             print(f.read())
@@ -93,15 +100,23 @@ def main():
 
                 elif choice == "Delete User":
                     username = input("Enter username to delete: ")
-                    auth.delete(username)
+                    confirm = input("Are you sure? (y/n): ")
+
+                    if confirm.lower() == "y":
+                        if auth.db.delete_user(username):
+                            auth.log(f"Deleted user: {username}")
+                            console.print("[red]User deleted[/red]")
+                        else:
+                            console.print("[red]User not found[/red]")
                     pause()
 
                 elif choice == "Logout":
                     current_user = None
                     role = None
 
-            # USER MENU
+            # ================= USER =================
             else:
+
                 choice = questionary.select(
                     f"Welcome {current_user}",
                     choices=[
@@ -126,13 +141,10 @@ def main():
                     water = float(input("Water: "))
                     grams = float(input("Grams: "))
 
-                    food = FoodItem(
-                        name, cal, carbs, sugar, fiber, protein, fat, water, grams
-                    )
-
+                    food = FoodItem(name, cal, carbs, sugar, fiber, protein, fat, water, grams)
                     tracker.add_food(food.compute_scaled())
+
                     console.print("[green]Food added![/green]")
-                    time.sleep(1)
                     pause()
 
                 elif choice == "View History":
@@ -162,14 +174,20 @@ def main():
                     pause()
 
                 elif choice == "Delete Account":
-                    auth.delete(current_user)
-                    current_user = None
-                    role = None
+                    confirm = input("Are you sure you want to delete this account? (y/n): ")
+
+                    if confirm.lower() == "y":
+                        auth.db.delete_user(current_user)
+                        auth.log(f"Deleted account: {current_user}")
+                        console.print("[red]Account deleted[/red]")
+                        current_user = None
+                        role = None
                     pause()
 
                 elif choice == "Logout":
                     current_user = None
                     role = None
+
 
 if __name__ == "__main__":
     main()
