@@ -49,7 +49,7 @@ def main():
                 pause()
 
             elif choice == "Register Admin":
-                auth.register_admin()   # ✅ THIS SHOWS ADMIN ID AFTER
+                auth.register_admin()   # THIS SHOWS ADMIN ID AFTER
                 pause()
 
             elif choice == "Login":
@@ -65,7 +65,7 @@ def main():
             clear()
             show_title()
 
-            # 👑 ADMIN MENU
+            # ADMIN MENU
             if role == "admin":
                 choice = questionary.select(
                     f"[ADMIN] {current_user}",
@@ -100,7 +100,7 @@ def main():
                     current_user = None
                     role = None
 
-            # 👤 USER MENU
+            # USER MENU
             else:
                 choice = questionary.select(
                     f"Welcome {current_user}",
