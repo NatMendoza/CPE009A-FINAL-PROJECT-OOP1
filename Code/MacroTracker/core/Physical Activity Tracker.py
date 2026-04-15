@@ -62,8 +62,6 @@ class PhysicalActivityTracker:
                     "Back"
                 ]
             ).ask()
-tracker = Tracker()
-activity_tracker = PhysicalActivityTracker()
 
             if choice == "Log Activity":
                 self.log_activity()
