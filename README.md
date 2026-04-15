@@ -1,7 +1,7 @@
-# FINAL PROJECT
+# **MacroTracker - Final Project**
 
 This repository is for compilation of final project.
-
+## **Members**
 Deoferio, Jan Zachary M.I.  
 Mauro, Ryan Lewis M.I.  
 Mendoza, Nathaniel B.  
@@ -32,3 +32,4 @@ pip install questionary pyfiglet rich
 ```bash
 python main.py
 ```
+
