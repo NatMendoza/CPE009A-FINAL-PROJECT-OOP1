@@ -5,12 +5,44 @@
 
 💪Track your meals. Monitor your activity. Improve your health.  
 
-## **Members**🧑‍💻
-Deoferio, Jan Zachary M.I.  
-Mauro, Ryan Lewis M.I.  
-Mendoza, Nathaniel B.  
-Pilapil, Loreen Jae D.  
-Silao, Johrel Louie T.
+## Team🧑‍💻
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/username1.png" width="100px" alt=""/><br />
+      <b>Deoferio, Jan Zachary </b><br />
+      <a href="">GitHub</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Maurocpe.png" width="100px" alt=""/><br />
+      <b>Mauro, Ryan Lewis </b><br />
+      <a href="https://github.com/Maurocpe">GitHub</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/NatMendoza.png" width="100px" alt=""/><br />
+      <b>Mendoza, Nathaniel B.</b><br />
+      <a href="https://github.com/NatMendoza">GitHub</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/Pilapilcpe.png" width="100px" alt=""/><br />
+      <b>Pilapil, Loreen Jae D.</b><br />
+      <a href="https://github.com/Pilapilcpe">GitHub</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Louie-1820.png" width="100px" alt=""/><br />
+      <b>Silao, Johrel Louie T.</b><br />
+      <a href="https://github.com/Louie-1820">GitHub</a>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+</div>
  
 ---
 
