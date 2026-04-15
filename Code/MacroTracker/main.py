@@ -165,8 +165,8 @@ def main():
                     pause()
 
                 elif choice == "BMI Check":                    # Calculates the Body Mass Index (In reference to the actual BMI Sheet)
-                    w = float(input("Weight: "))
-                    h = float(input("Height: "))
+                    w = float(input("Weight in kg: "))
+                    h = float(input("Height in meters: "))
                     bmi = BMI.compute(w, h)
 
                     console.print(f"BMI: {bmi:.2f}")
