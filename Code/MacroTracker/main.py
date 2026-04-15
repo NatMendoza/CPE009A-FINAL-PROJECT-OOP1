@@ -176,7 +176,7 @@ def main():
                     pause()
 
                 elif choice == "Physical Activity Tracker":
-                    activity_tracker.dashboard()                 # Physical activity Tracker
+                    activity_tracker.dashboard(clear, show_title, console, pause)                 # Physical activity Tracker
 
                 elif choice == "Delete Account":                # Account deletion (Application of CRUD?) 
                     confirm = input("Are you sure you want to delete this account? (y/n): ")
