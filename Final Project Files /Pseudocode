@@ -12,6 +12,8 @@ IMPORT SYSTEM MODULES:
     questionary → CLI menus
     pyfiglet → title display
     abc → abstraction (OOP)
+    Dashboard → dashboard system
+    TaskManager → task system
 
 ---------------------------------------
 INITIALIZE SYSTEM COMPONENTS
@@ -163,15 +165,27 @@ WHILE True:
         --------------------------------
 
             SHOW USER MENU:
-                1. Add Food
-                2. View History
-                3. Delete Food Entry
-                4. Calculate Total
-                5. BMI Check
-                6. Delete Account
-                7. Logout
+                1. Dashboard
+                2. Calendar
+                3. Add Food
+                4. View History
+                5. Delete Food Entry
+                6. Calculate Total
+                7. BMI Check
+                8. Add Task
+                9. View Tasks
+                10. Complete Tasks
+                11. Delete Account
+                12. Logout
 
             GET choice
+            IF Dashboard:
+                CALL Dashboard.show(user_data) 
+                Show stats & motivation
+
+            IF Calendar:
+                CALL Dashboard.calendar(user_data)
+                Show calendar view
 
             IF Add Food:
                 INPUT food data
@@ -194,6 +208,19 @@ WHILE True:
                 COMPUTE BMI
                 DISPLAY result
                 CALL advice()
+
+            IF Add Task:
+                IF Add Task:
+                CALL TaskManager.add_task()
+                Append to user database
+            
+            IF View Tasks:
+                CALL TaskManager.view_tasks() 
+                Display list
+            
+            IF Complete Task:
+                CALL TaskManager.complete_task()
+                Update status in database
 
             IF Delete Account:
                 CONFIRM
