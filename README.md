@@ -1,4 +1,4 @@
-# **Final Project**
+# **FINAL PROJECT**
 
 ![009a gif](https://i.imgur.com/E4jgR4N.gif)
 
@@ -75,3 +75,5 @@ pip install questionary pyfiglet rich
 ```bash
 python main.py
 ```
+## Acknowledgments
+Developed as part of our Object-Oriented Programming course Final Project
