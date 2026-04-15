@@ -4,6 +4,7 @@ from rich.console import Console
 console = Console()
 
 class Tracker:
+
     def __init__(self):
         self.history = []
 
@@ -40,10 +41,14 @@ class Tracker:
         for i, f in enumerate(self.history):
             print(f"{i+1}. {f.name}")
 
-        choice = int(input("Select item to delete: ")) - 1
+        try:
+            choice = int(input("Select item: ")) - 1
+        except:
+            console.print("[red]Invalid input[/red]")
+            return
 
         if 0 <= choice < len(self.history):
             del self.history[choice]
-            console.print("[yellow]Deleted successfully[/yellow]")
+            console.print("[yellow]Deleted[/yellow]")
         else:
             console.print("[red]Invalid choice[/red]")
