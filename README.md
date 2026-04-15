@@ -18,7 +18,7 @@ Step-by-step instructions on how to install and set up the project.
 1. Download the github repository
 2. Open Command Prompt in the Project folder
 ```bash
-cd %USERPROFILE%\Desktop\CPE009A-FINAL-PROJECT-OOP1-main\CPE009A-FINAL-PROJECT-OOP1-main\Code\MacroTracker>
+cd %USERPROFILE%\Desktop\CPE009A-FINAL-PROJECT-OOP1-main\CPE009A-FINAL-PROJECT-OOP1-main\Code\MacroTracker
 ```
 3. Set up Python
 ```bash
