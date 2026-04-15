@@ -7,14 +7,13 @@ class PhysicalActivityTracker:
             "moderate": 20,
             "high": 10
         }
-
     def get_suggestion(self, intensity, time_minutes):
-        recommended_time = self.recommendations[intensity]
+        recommended_time= self.recommendations[intensity]
 
         if time_minutes < recommended_time:
             return "Add more intensity or time."
         elif time_minutes > recommended_time * 1.5:
-            return "Take it a bit slower."
+            return "Slow down, you are over exercising."
         else:
             return "Great job!"
 
@@ -34,20 +33,19 @@ class PhysicalActivityTracker:
                     choices=["cardio", "weightlifting"]
                 ).ask()
 
-                intensity = questionary.select(
+                intensity= questionary.select(
                     "Intensity:",
                     choices=["low", "moderate", "high"]
                 ).ask()
 
                 try:
-                    time_minutes = float(input("Time (minutes): "))
-                    if time_minutes <= 0:
+                    time_minutes= float(input("Time (minutes): "))
+                    if time_minutes<= 0:
                         raise ValueError
                 except:
                     console.print("[red]Invalid input[/red]")
                     pause()
                     continue
-
                 suggestion = self.get_suggestion(intensity, time_minutes)
 
                 console.print(f"Type: {activity_type}")
@@ -56,6 +54,5 @@ class PhysicalActivityTracker:
                 console.print(f"Suggestion: {suggestion}")
 
                 pause()
-
             elif choice == "Back":
                 break
