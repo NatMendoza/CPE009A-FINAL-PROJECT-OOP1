@@ -12,7 +12,7 @@ from core.suggestions import HealthAdvisor       # Health suggestions.
 from core.dashboard import Dashboard             # Dashboard system (NEW).
 from core.tasks import TaskManager               # Task system (NEW).
 from models.macros import FoodItem               # Food object model.
-
+from core.activity_tracker import PhysicalActivityTracker
 console = Console()                              # Initialize rich console.
 
 # ================= CLEAR SCREEN =================
@@ -190,6 +190,10 @@ def main():
                     console.print(f"BMI: {bmi:.2f}")
                     HealthAdvisor.bmi_advice(bmi)
                     pause()
+                    
+                    #ACTIVITY TRACKER
+                elif choice == "Physical Activity Tracker":
+                    activity_tracker.dashboard(clear, show_title, console, pause)  
 
                 # TASK SYSTEM
                 elif choice == "Add Task":
