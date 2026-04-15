@@ -1,163 +1,174 @@
-import os                                        # Terminal Clearing.
-import time                                      # Timestamp for logs and delays (Waits for user input to proceed).
-import random                                    # For random generation of ID for admin and color for display.
-import questionary                               # Menu UI
-import pyfiglet                                  # ASCII Titlte generation for MACROTRACKER display.
-from rich.console import Console                 # Styled printing specifically colors output formatting.
+import os                                        # Used to clear terminal screen depending on OS.
+import time                                      # Used for delay (pause effect).
+import random                                    # Used to randomize title color.
+import questionary                               # Provides interactive CLI menu.
+import pyfiglet                                  # Creates ASCII art title.
+from rich.console import Console                 # Allows colored/styled output.
 
-from authentication.system import AuthSystem
-from core.tracker import Tracker
-from core.bmi import BMI
-from core.suggestions import HealthAdvisor
-from models.macros import FoodItem
-from core.activity_tracker import PhysicalActivityTracker
-console = Console()
+from authentication.system import AuthSystem     # Handles login/register system.
+from core.tracker import Tracker                 # Handles food tracking.
+from core.bmi import BMI                         # BMI computation logic.
+from core.suggestions import HealthAdvisor       # Health suggestions.
+from core.dashboard import Dashboard             # Dashboard system (NEW).
+from core.tasks import TaskManager               # Task system (NEW).
+from models.macros import FoodItem               # Food object model.
+
+console = Console()                              # Initialize rich console.
 
 # ================= CLEAR SCREEN =================
-def clear():                                     # This basically clears terminal screen depending on the OS.
-    os.system('cls' if os.name == 'nt' else 'clear')
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clears terminal screen.
 
-# ================= TITLE (CHANGING COLOR) =================
-def show_title():                                # This function basically random selects a color and prints macrotracker title display.
-    colors = ["cyan", "green", "yellow", "magenta", "blue"]
-    color = random.choice(colors)
-    console.print(pyfiglet.figlet_format("MacroTracker"), style=color)
+# ================= TITLE =================
+def show_title():
+    colors = ["cyan", "green", "yellow", "magenta", "blue"]  # List of colors.
+    console.print(pyfiglet.figlet_format("MacroTracker"), style=random.choice(colors))  # Random color title.
 
 # ================= PAUSE =================
-def pause():                                      # Pauses the program until pressed enter to proceed. (Basically waits user input)        
-    input("\nPress Enter to continue...")
+def pause():
+    input("\nPress Enter to continue...")        # Waits for user input.
 
-# ================= MAIN =================        # This is the main program function in combination of all the .py files which were organized into folders.
+# ================= MAIN =================
 def main():
-    auth = AuthSystem()                           # Handles the login/resigtration of the UI.
-    tracker = Tracker()                              # Handles food history.
-    activity_tracker = PhysicalActivityTracker() 
+    auth = AuthSystem()                         # Handles authentication logic.
+    tracker = Tracker()                         # Handles food tracking.
 
-    current_user = None                           # Trackers the logged user
-    role = None                                   # Trackers the user role whether if its user/admin.
+    current_user = None                         # Stores current logged-in user.
+    role = None                                 # Stores role (user/admin).
 
-    while True:                                   # Applies a loop which runs continuosly until met a condition.
+    while True:                                 # Infinite loop for program.
         clear()
         show_title()
 
-        # USER NOT LOGGED IN
-        if not current_user:                      # The program will do if it is not logged in.
+        # ================= NOT LOGGED IN =================
+        if not current_user:
 
-            choice = questionary.select(          # Choice display.    
+            choice = questionary.select(
                 "Select Option:",
-                choices=[
-                    "Register User",
-                    "Register Admin",
-                    "Login",
-                    "Exit"
-                ]
+                choices=["Register User", "Register Admin", "Login", "Exit"]
             ).ask()
 
             if choice == "Register User":
-                auth.register_user()                # Creating user account.
+                auth.register_user()            # Calls user registration.
                 pause()
 
             elif choice == "Register Admin":
-                auth.register_admin()                # Creating administrator account.
+                auth.register_admin()           # Calls admin registration.
                 pause()
 
-            elif choice == "Login":                  
-                current_user, role = auth.login()    # User login.
+            elif choice == "Login":
+                current_user, role = auth.login()  # Login returns username + role.
                 pause()
 
-            elif choice == "Exit":        
-                console.print("[red]Goodbye![/red]")  # Leaves the program / Quit.
+            elif choice == "Exit":
+                console.print("[red]Goodbye![/red]")
                 break
 
-        # USER LOOGGED IN
+        # ================= LOGGED IN =================
         else:
             clear()
             show_title()
 
+            user_data = auth.db.get_user(current_user)  # Fetch user data.
+
             # ================= ADMIN =================
-            if role == "admin":                        # If it is admin then it will show Admin menu.
+            if role == "admin":
 
                 choice = questionary.select(
                     f"[ADMIN] {current_user}",
-                    choices=[
-                        "View Logs",
-                        "View History",
-                        "Delete User",
-                        "Logout"
-                    ]
+                    choices=["View Logs", "View All Users", "Delete User", "Logout"]
                 ).ask()
 
-                if choice == "View Logs":                # This opens the data inside the text file which can be also edited through the main text file.
+                if choice == "View Logs":
                     try:
-                        with open("logs.txt", "r") as f:
+                        with open("logs.txt", "r") as f:   # Open logs file.
                             print(f.read())
                     except:
-                        print("No logs yet.")            # Fallback message if the file doesn't exist yet.
+                        print("No logs yet.")
                     pause()
 
-                elif choice == "View History":           # Allows the admin to view food history.
-                    tracker.show_history()
+                elif choice == "View All Users":
+                    data = auth.db.load()                 # Load all users.
+                    for user in data:
+                        print(user, "-", data[user]["role"])  # Show username + role.
                     pause()
 
-                elif choice == "Delete User":            # Allows admin to manually remove an account from the database.
-                    username = input("Enter username to delete: ")
+                elif choice == "Delete User":
+                    username = input("Enter username: ")
                     confirm = input("Are you sure? (y/n): ")
 
                     if confirm.lower() == "y":
                         if auth.db.delete_user(username):
-                            auth.log(f"Deleted user: {username}")
+                            auth.log(f"Deleted user: {username}")  # Log action.
                             console.print("[red]User deleted[/red]")
                         else:
                             console.print("[red]User not found[/red]")
                     pause()
 
-                elif choice == "Logout":                   # Ends the admin session.
-                    current_user = None                    # Clears the active username.
-                    role = None                            # Clears the active role, returning the loop to the Guest Menu.
+                elif choice == "Logout":
+                    current_user = None
+                    role = None
 
             # ================= USER =================
-            else:                                          # If user is not an admin then displays user menu.
+            else:
 
-                choice = questionary.select(               # This provides the user menu choices.
+                choice = questionary.select(
                     f"Welcome {current_user}",
                     choices=[
-                        "Add Food",
-                        "View History",
-                        "Delete Food Entry",
-                        "Calculate Total",
-                        "BMI Check",
-                        "Physical Activity Tracker",
-                        "Delete Account",
-                        "Logout"
+                        "Dashboard", "Calendar",
+                        "Add Food", "View History", "Delete Food Entry",
+                        "Calculate Total", "BMI Check",
+                        "Add Task", "View Tasks", "Complete Task",
+                        "Delete Account", "Logout"
                     ]
                 ).ask()
 
-                if choice == "Add Food":                    # Creates food as "object"
-                    name = input("Food: ")
-                    cal = float(input("Calories: "))
-                    carbs = float(input("Carbs: "))
-                    sugar = float(input("Sugar: "))
-                    fiber = float(input("Fiber: "))
-                    protein = float(input("Protein: "))
-                    fat = float(input("Fat: "))
-                    water = float(input("Water: "))
-                    grams = float(input("Grams: "))
+                # DASHBOARD
+                if choice == "Dashboard":
+                    Dashboard.show(user_data)   # Show stats + motivation.
+                    pause()
+
+                elif choice == "Calendar":
+                    Dashboard.calendar(user_data)  # Show calendar.
+                    pause()
+
+                # FOOD SYSTEM
+                elif choice == "Add Food":
+                    try:
+                        name = input("Food: ")
+                        cal = float(input("Calories: "))
+                        carbs = float(input("Carbs: "))
+                        sugar = float(input("Sugar: "))
+                        fiber = float(input("Fiber: "))
+                        protein = float(input("Protein: "))
+                        fat = float(input("Fat: "))
+                        water = float(input("Water: "))
+                        grams = float(input("Grams: "))
+                    except:
+                        console.print("[red]Invalid input[/red]")
+                        pause()
+                        continue
 
                     food = FoodItem(name, cal, carbs, sugar, fiber, protein, fat, water, grams)
-                    tracker.add_food(food.compute_scaled())  # Adds the food to the history
+                    tracker.add_food(food.compute_scaled())
+
+                    # Save to database
+                    data = auth.db.load()
+                    data[current_user]["history"].append({"name": name, "calories": cal})
+                    auth.db.save(data)
 
                     console.print("[green]Food added![/green]")
                     pause()
 
-                elif choice == "View History":               # Displays the food history
+                elif choice == "View History":
                     tracker.show_history()
                     pause()
 
-                elif choice == "Delete Food Entry":          # Removes a food from a history (Application of CRUD + Additionally, it might have contained a wrong input)
+                elif choice == "Delete Food Entry":
                     tracker.delete_food()
                     pause()
 
-                elif choice == "Calculate Total":            # Gets the sum
+                elif choice == "Calculate Total":
                     cal = sum(f.calories for f in tracker.history)
                     sugar = sum(f.sugar for f in tracker.history)
                     fat = sum(f.fat for f in tracker.history)
@@ -166,21 +177,36 @@ def main():
                     HealthAdvisor.show(cal, sugar, fat)
                     pause()
 
-                elif choice == "BMI Check":                    # Calculates the Body Mass Index (In reference to the actual BMI Sheet)
-                    w = float(input("Weight in kg: "))
-                    h = float(input("Height in meters: "))
-                    bmi = BMI.compute(w, h)
+                elif choice == "BMI Check":
+                    try:
+                        w = float(input("Weight: "))
+                        h = float(input("Height: "))
+                    except:
+                        console.print("[red]Invalid input[/red]")
+                        pause()
+                        continue
 
+                    bmi = BMI.compute(w, h)
                     console.print(f"BMI: {bmi:.2f}")
-                    HealthAdvisor.bmi_advice(bmi)               # Program provides and shows "possible" suggestiongs to user.
+                    HealthAdvisor.bmi_advice(bmi)
                     pause()
 
-                elif choice == "Physical Activity Tracker":
-                    activity_tracker.dashboard(clear, show_title, console, pause)                 # Physical activity Tracker
+                # TASK SYSTEM
+                elif choice == "Add Task":
+                    TaskManager.add_task(user_data, auth.db, current_user)
+                    pause()
 
-                elif choice == "Delete Account":                # Account deletion (Application of CRUD?) 
-                    confirm = input("Are you sure you want to delete this account? (y/n): ")
+                elif choice == "View Tasks":
+                    TaskManager.view_tasks(user_data)
+                    pause()
 
+                elif choice == "Complete Task":
+                    TaskManager.complete_task(user_data, auth.db, current_user)
+                    pause()
+
+                # DELETE ACCOUNT
+                elif choice == "Delete Account":
+                    confirm = input("Are you sure? (y/n): ")
                     if confirm.lower() == "y":
                         auth.db.delete_user(current_user)
                         auth.log(f"Deleted account: {current_user}")
@@ -189,10 +215,10 @@ def main():
                         role = None
                     pause()
 
-                elif choice == "Logout":                          # Resets the user and role which go back to the loop.
+                elif choice == "Logout":
                     current_user = None
                     role = None
 
 
 if __name__ == "__main__":
-    main()                                                         # RUNS THE PROGRAM.
+    main()  # Runs the program
