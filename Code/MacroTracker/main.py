@@ -92,14 +92,14 @@ def main():
                         with open("logs.txt", "r") as f:
                             print(f.read())
                     except:
-                        print("No logs yet.")
+                        print("No logs yet.")            # Fallback message if the file doesn't exist yet.
                     pause()
 
-                elif choice == "View History":
+                elif choice == "View History":           # Allows the admin to view food history.
                     tracker.show_history()
                     pause()
 
-                elif choice == "Delete User":
+                elif choice == "Delete User":            # Allows admin to manually remove an account from the database.
                     username = input("Enter username to delete: ")
                     confirm = input("Are you sure? (y/n): ")
 
@@ -111,9 +111,9 @@ def main():
                             console.print("[red]User not found[/red]")
                     pause()
 
-                elif choice == "Logout":
-                    current_user = None
-                    role = None
+                elif choice == "Logout":                   # Ends the admin session.
+                    current_user = None                    # Clears the active username.
+                    role = None                            # Clears the active role, returning the loop to the Guest Menu.
 
             # ================= USER =================
             else:                                          # If user is not an admin then displays user menu.
