@@ -1,13 +1,6 @@
 # **Final Project**
 
-```text
- __  __                    _______             _             
-|  \/  |                  |__   __|           | |            
-| \  / | __ _  ___ _ __ ___  | |_ __ __ _  ___| | _____ _ __ 
-| |\/| |/ _` |/ __| '__/ _ \ | | '__/ _` |/ __| |/ / _ \ '__|
-| |  | | (_| | (__| | | (_) || | | | (_| | (__|   <  __/ |   
-|_|  |_|\__,_|\___|_|  \___/ |_|_|  \__,_|\___|_|\_\___|_|   
-```
+![009a gif](https://i.imgur.com/E4jgR4N.gif)
 💪Track your meals. Monitor your activity. Improve your health.  
 
 ## **Members**🧑‍💻
@@ -17,7 +10,14 @@ Mendoza, Nathaniel B.
 Pilapil, Loreen Jae D.  
 Silao, Johrel Louie T.
  
+---
 
+## 🚀 Features
+- 🟡 Track daily macronutrient intake
+- 🔵 Record physical activities
+- 🟣 Calculate Body Mass Index
+- 🟢 Get exercise and diet feedback
+- ⚪ Easy to use command line interface
 ---
 
 ## **Installation**📌
@@ -41,4 +41,3 @@ pip install questionary pyfiglet rich
 ```bash
 python main.py
 ```
-
