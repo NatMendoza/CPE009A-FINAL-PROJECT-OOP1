@@ -125,6 +125,7 @@ def main():
                         "Delete Food Entry",
                         "Calculate Total",
                         "BMI Check",
+                        "Physical Activity Tracker",
                         "Delete Account",
                         "Logout"
                     ]
@@ -172,6 +173,9 @@ def main():
                     console.print(f"BMI: {bmi:.2f}")
                     HealthAdvisor.bmi_advice(bmi)               # Program provides and shows "possible" suggestiongs to user.
                     pause()
+
+                elif choice == "Physical Activity Tracker":
+                    activity_tracker.dashboard()                 # Physical activity Tracker
 
                 elif choice == "Delete Account":                # Account deletion (Application of CRUD?) 
                     confirm = input("Are you sure you want to delete this account? (y/n): ")
