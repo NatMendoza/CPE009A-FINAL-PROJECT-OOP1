@@ -30,7 +30,8 @@ def pause():                                      # Pauses the program until pre
 # ================= MAIN =================        # This is the main program function in combination of all the .py files which were organized into folders.
 def main():
     auth = AuthSystem()                           # Handles the login/resigtration of the UI.
-    tracker = Tracker()                           # Handles food history.
+    tracker = Tracker()                              # Handles food history.
+    activity_tracker = PhysicalActivityTracker() 
 
     current_user = None                           # Trackers the logged user
     role = None                                   # Trackers the user role whether if its user/admin.
