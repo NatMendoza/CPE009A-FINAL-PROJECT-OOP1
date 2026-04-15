@@ -8,9 +8,9 @@
 | |  | | (_| | (__| | | (_) || | | | (_| | (__|   <  __/ |   
 |_|  |_|\__,_|\___|_|  \___/ |_|_|  \__,_|\___|_|\_\___|_|   
 ```
-Track your meals. Monitor your activity. Improve your health.  
+💪Track your meals. Monitor your activity. Improve your health.  
 
-## **Members**
+## **Members**🧑‍💻
 Deoferio, Jan Zachary M.I.  
 Mauro, Ryan Lewis M.I.  
 Mendoza, Nathaniel B.  
@@ -20,7 +20,7 @@ Silao, Johrel Louie T.
 
 ---
 
-## **Installation**
+## **Installation**📌
 
 Step-by-step instructions on how to install and set up the project. 
 
