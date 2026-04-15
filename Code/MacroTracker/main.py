@@ -10,6 +10,7 @@ from core.tracker import Tracker
 from core.bmi import BMI
 from core.suggestions import HealthAdvisor
 from models.macros import FoodItem
+from core.activity_tracker import PhysicalActivityTracker
 
 console = Console()
 
