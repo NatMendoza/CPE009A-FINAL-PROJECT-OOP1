@@ -93,9 +93,9 @@ def main():
                         print(user, "-", data[user]["role"])  # Show username + role.
                     pause()
 
-                elif choice == "Delete User":
-                    username = input("Enter username: ")
-                    confirm = input("Are you sure? (y/n): ")
+                elif choice == "Delete User":              # Deletes User
+                    username = input("Enter username: ")   # Input Registered User to delete
+                    confirm = input("Are you sure? (y/n): ")  # Confirmation of deleting User
 
                     if confirm.lower() == "y":
                         if auth.db.delete_user(username):
