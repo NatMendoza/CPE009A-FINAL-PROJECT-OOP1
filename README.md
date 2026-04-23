@@ -1,9 +1,12 @@
 # **FINAL PROJECT**
 
-![009a gif](https://i.imgur.com/E4jgR4N.gif)
+<div align="center">
 
+<img src="https://i.imgur.com/E4jgR4N.gif" width="700"/>
 
-💪Track your meals. Monitor your activity. Improve your health.  
+ Track your meals. Monitor your activity. Improve your health.
+
+</div>
 
 ## Team🧑‍💻
 
@@ -87,6 +90,6 @@ python main.py
 ## 👍ACKNOWLEDGEMENT
 Developed as part of our Object-Oriented Programming course Final Project
 
-![Demo](https://i.imgur.com/abc123.gif)<p align="center">
+  ![quote](https://i.imgur.com/abc123.gif)<p align="center">
   <img src="https://www.codecademy.com/resources/blog/wp-content/uploads/2024/01/Chris-Pine-quote.png?resize=768" width="600">
 </p>
