@@ -43,8 +43,11 @@
 </table>
 
 </div>
- 
----
+
+## **THE PROJECT**
+
+The MacroTracker is a command-line health monitoring system that tracks an individual's daily macronutrient intake. The system focuses on nutrition, physical activity, and health journey. Its main goal is to provide users a simple way to track what they eat, record physical activity, and receive helpful health feedback. The system is built using Python and follows an Object-Oriented programming approach to keep codes structured and easy to understand. 
+The project aims to aid and support individuals who are struggling to monitor and track their macronutrient intake and provide a good healthy journey.
 
 ## 🚀 Features
 - 🟡 Track daily macronutrient intake
