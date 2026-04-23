@@ -44,7 +44,13 @@
 
 </div>
 
-## **THE PROJECT**
+## 🚨**THE PROBLEM**
+
+Maintaining a consistent and healthy lifestyle, macronutrient intake is vital for energy, growth and prevention of diseases. However, many people still struggle to accurately track and monitor their macronutrient intake such as proteins, carbohydrates and lipids, which are essential for bodily function. 
+
+Manually tracking an individual’s Body Mass Index (BMI), often leads to inconsistency, which leads to uneffectively logging a person’s meals and physical activities. This specific problem leads to a high demand for technology that efficiently monitor’s a person’s macronutrient intake and also provides a guideline towards a healthy lifestyle.
+
+## 💡**THE PROJECT**
 
 The MacroTracker is a command-line health monitoring system that tracks an individual's daily macronutrient intake. The system focuses on nutrition, physical activity, and health journey. Its main goal is to provide users a simple way to track what they eat, record physical activity, and receive helpful health feedback. The system is built using Python and follows an Object-Oriented programming approach to keep codes structured and easy to understand. 
 The project aims to aid and support individuals who are struggling to monitor and track their macronutrient intake and provide a good healthy journey.
@@ -57,7 +63,7 @@ The project aims to aid and support individuals who are struggling to monitor an
 - ⚪ Easy to use command line interface
 ---
 
-## **Installation**📌
+## **INSTALLATION**📌
 
 Step-by-step instructions on how to install and set up the project. 
 
@@ -78,5 +84,9 @@ pip install questionary pyfiglet rich
 ```bash
 python main.py
 ```
-## Acknowledgments
+## 👍ACKNOWLEDGEMENT
 Developed as part of our Object-Oriented Programming course Final Project
+
+![Demo](https://i.imgur.com/abc123.gif)<p align="center">
+  <img src="https://www.codecademy.com/resources/blog/wp-content/uploads/2024/01/Chris-Pine-quote.png?resize=768" width="600">
+</p>
